@@ -112,3 +112,86 @@ public void calculadoraBasica() {
     }
 }
 
+    public void listaDeEstudiantes() {
+        System.out.println("Lista de estudiantes:");
+        for (Estudiante estudiante : estudiantes) {
+            System.out.println("Nombre: " + estudiante.getNombre() + ", Calificación: " + (estudiante.getCalificacion() == -1 ? "No asignada" : estudiante.getCalificacion()));
+        }
+    }
+
+    public void gestionDeEstudiantes() {
+        boolean gestionSalir = false;
+
+        while (!gestionSalir) {
+            System.out.println("\n====================");
+            System.out.println("  Gestion de estudiantes");
+            System.out.println("====================");
+            System.out.println("1. Agregar estudiante");
+            System.out.println("2. Eliminar estudiante");
+            System.out.println("3. Ingresar calificación de estudiante");
+            System.out.println("4. Volver al menú principal");
+            System.out.println("====================");
+            System.out.print("Ingrese su opcion: ");
+            int opcion = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (opcion) {
+                case 1:
+                    agregarEstudiante();
+                    break;
+                case 2:
+                    eliminarEstudiante();
+                    break;
+                case 3:
+                    ingresarCalificacionEstudiante();
+                    break;
+                case 4:
+                    gestionSalir = true;
+                    break;
+                default:
+                    System.out.println("Error: Opción no válida. Por favor, seleccione una opción válida.");
+                    break;
+            }
+        }
+    }
+
+    private void agregarEstudiante() {
+        System.out.print("Ingrese el nombre del estudiante a agregar: ");
+        String nombre = scanner.nextLine();
+        estudiantes.add(new Estudiante(nombre));
+        System.out.println("Estudiante \"" + nombre + "\" agregado correctamente.");
+    }
+
+    private void eliminarEstudiante() {
+        System.out.print("Ingrese el nombre del estudiante a eliminar: ");
+        String nombre = scanner.nextLine();
+        boolean encontrado = false;
+        for (Estudiante estudiante : estudiantes) {
+            if (estudiante.getNombre().equals(nombre)) {
+                estudiantes.remove(estudiante);
+                System.out.println("Estudiante \"" + nombre + "\" eliminado correctamente.");
+                encontrado = true;
+                break;
+            }
+        }
+        if (!encontrado) {
+            System.out.println("Error: Estudiante no encontrado.");
+        }
+    }
+
+    private void ingresarCalificacionEstudiante() {
+        System.out.print("Ingrese el nombre del estudiante para asignar calificación: ");
+        String nombre = scanner.nextLine();
+        for (Estudiante estudiante : estudiantes) {
+            if (estudiante.getNombre().equals(nombre)) {
+                System.out.print("Ingrese la calificación: ");
+                double calificacion = scanner.nextDouble();
+                scanner.nextLine(); // Consume newline
+                estudiante.setCalificacion(calificacion);
+                System.out.println("Calificación asignada correctamente a \"" + nombre + "\".");
+                return;
+            }
+        }
+        System.out.println("Error: Estudiante no encontrado.");
+    }
+}
