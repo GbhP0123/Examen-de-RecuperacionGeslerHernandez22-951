@@ -46,6 +46,31 @@ public class ExamenFinalVarianteA {
         scanner.close();
     }
 }
+class Estudiante {
+    private String nombre;
+    private double calificacion;
+
+    public Estudiante(String nombre) {
+        this.nombre = nombre;
+        this.calificacion = -1; // Indica que la calificación no ha sido asignada
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public double getCalificacion() {
+        return calificacion;
+    }
+
+    public void setCalificacion(double calificacion) {
+        this.calificacion = calificacion;
+    }
+}
+
+class Menu {
+    private static Scanner scanner = new Scanner(System.in);
+    private static List<Estudiante> estudiantes = new ArrayList<>();
 
 public void calculadoraBasica() {
     System.out.print("Ingrese el primer número: ");
